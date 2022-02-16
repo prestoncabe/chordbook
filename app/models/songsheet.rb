@@ -16,6 +16,7 @@ class Songsheet < ApplicationRecord
   validates :title, presence: true
   validates :format, presence: true
 
+  after_initialize :set_defaults
   before_save :associate_metadata
   after_save :mark_track
 
@@ -41,6 +42,10 @@ class Songsheet < ApplicationRecord
   end
 
   private
+
+  def set_defaults
+    self.format ||= "ChordPro"
+  end
 
   def associate_metadata
     artist_names = Array(metadata["artist"]).map { |a| a.split(/\s*,\s*/) }.flatten
