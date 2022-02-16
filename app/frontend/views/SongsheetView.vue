@@ -53,6 +53,7 @@
     <song-sheet
       v-if="songsheet.source"
       :source="songsheet.source"
+      :format="songsheet.format"
       :show-chords="showChords"
       :transpose="transpose"
       @update:key="(v) => key = v"

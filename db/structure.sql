@@ -339,7 +339,8 @@ CREATE TABLE public.songsheets (
     metadata json,
     track_id bigint,
     title character varying,
-    imported_from character varying
+    imported_from character varying,
+    format character varying
 );
 
 
@@ -903,6 +904,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220205051917'),
 ('20220207123911'),
 ('20220210133540'),
-('20220211173533');
+('20220211173533'),
+('20220215201639');
 
 

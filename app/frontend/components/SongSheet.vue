@@ -109,7 +109,7 @@
 
 <script>
 import { Chord } from 'chordsheetjs'
-import detectFormat from '@/lib/detect_format'
+import formats from '@/formats'
 import ChordLyricsPair from '@/components/ChordLyricsPair.vue'
 import SongSheetComment from '@/components/SongSheetComment.vue'
 import ChordDiagram from '@/components/ChordDiagram.vue'
@@ -125,6 +125,11 @@ export default {
     source: {
       type: String,
       default: null
+    },
+
+    format: {
+      type: String,
+      default: 'ChordPro'
     },
 
     showChords: {
@@ -158,14 +163,9 @@ export default {
   },
 
   computed: {
-    format () {
-      return detectFormat(this.source)
-    },
-
     song () {
       try {
-        // FIXME: somehow \r is getting added by Ace
-        const song = this.format?.parse(this.source.replace(/\r\n/gm, '\n'))
+        const song = formats[this.format].parser.parse(this.source)
 
         // Transpose chords
         const chords = {}
